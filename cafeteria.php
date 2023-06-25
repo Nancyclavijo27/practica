@@ -32,6 +32,11 @@ if($_POST){
   }
 
  //"DELETE FROM producto WHERE `producto`.`ID` = 2"?
+ function actualizar_registro($ID, $nombre, $referencia, $precio, $peso, $categoria, $stock, $fecha) {
+  $sql = "UPDATE tabla SET nombre = '$nombre', referencia = '$referencia', precio = '$precio', peso = '$peso', categoria = '$categoria', stock = '$stock', fecha = '$fecha' WHERE id = $ID";
+  $this->conexion->exec($sql);
+  return "Registro actualizado correctamente.";
+}
  $objConexion= new conexion(); 
  $resultado=$objConexion->consultar("SELECT * FROM `producto`");
 
@@ -111,8 +116,8 @@ if($_POST){
               <input type="date" class="form-control" id="" name="fecha" required>
             </div>
             <input type="submit" value="Enviar" class="btn btn-primary">
-            
             <button type="button" class="btn btn-danger" id="editBtn">Editar</button>
+            
            
           </form>
 
