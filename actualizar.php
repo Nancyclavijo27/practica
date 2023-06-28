@@ -1,15 +1,7 @@
-<?php include("datosb.php");?>
-
-<?php 
-$mi_variable = "nombre";
-//var_dump($mi_variable);
-ob_start();
-//var_dump($mi_variable);
-$output = ob_get_clean();
-//echo $output;
+<?php
+include("datosb.php");
 
 if($_POST){ 
-    //var_dump($_POST);
     $nombre=$_POST["nombre"];
     $referencia=$_POST["referencia"];
     $precio=$_POST["precio"];
@@ -17,30 +9,17 @@ if($_POST){
     $categoria=$_POST["categoria"];
     $stock=$_POST["stock"];
     $fecha=$_POST["fecha"];
-    
 
- $objConexion= new conexion(); 
- $sql="INSERT INTO `producto` (`ID`, `nombre`, `referencia`, `precio`, `peso`, `categoria`, `stock`, `fecha`) VALUES (NULL, '$nombre', '$referencia', '$precio', '$peso', '$categoria', '$stock', '$fecha');";
- $objConexion->ejecutar($sql);
- //var_dump($objConexion->ejecutar($sql));
-}
- if(isset($_GET["borrar"])){
-    $id = $_GET["borrar"];
-    $objConexion = new conexion(); 
-    $sql = "DELETE FROM producto WHERE `producto`.`ID`=".$id;
+    $objConexion= new conexion(); 
+    $sql="UPDATE `producto` SET `nombre`='$nombre', `referencia`='$referencia', `precio`='$precio', `peso`='$peso', `categoria`='$categoria', `stock`='$stock', `fecha`='$fecha' WHERE `ID` = '1'";
     $objConexion->ejecutar($sql);
-    
-  }
-
- //"DELETE FROM producto WHERE `producto`.`ID` = 2"?
- 
- $objConexion= new conexion(); 
- $resultado=$objConexion->consultar("SELECT * FROM `producto`");
-
- //print_r($resultado);
+}
 
 
+  $objConexion= new conexion(); 
+  $resultado=$objConexion->consultar("SELECT * FROM `producto`");
 ?>
+
 
 
 <!DOCTYPE html>
@@ -76,19 +55,19 @@ if($_POST){
         <li>Categoría: <?php echo $producto['categoria']; ?></li>
         <li>Stock: <?php echo $producto['stock']; ?></li>
         <li>Fecha de creación: <?php echo $producto['fecha']; ?></li>
-        <a  class="btn btn-danger" href="?borrar=<?php echo $producto['ID']; ?>">Eliminar</a>
+        <a href="editar_producto.php?id=<?php echo $producto["ID"]; ?>">Editar</a>
       </ul> 
     <?php }?>
         </div>
       </div>
       <div class="col-md-6">
         <div class="bg-dark text-white mt-5 p-2">
-        <form action="cafeteria.php" method="post" >
-            <div class="form-group">
-              <input type="hidden" name="id" value="1">
-              <label for="nombre">Nombre de producto:</label>
-              <input type="text" class="form-control" id="" name="nombre" required>
-            </div>
+        <form action="actualizar.php" method="post" >
+        <div class="form-group">
+        <input type="hidden" name="ID" value="<?php echo $ID; ?>">
+        <label for="nombre">Nombre de producto:</label>
+        <input type="text" class="form-control" id="" name="nombre"  required>
+           </div>
             <div class="form-group">
               <label for="referencia">Referencia:</label>
               <input type="text" class="form-control" id="" name="referencia" required>
@@ -113,11 +92,10 @@ if($_POST){
               <label for="fecha_creacion">Fecha de creación:</label>
               <input type="date" class="form-control" id="" name="fecha" required>
             </div>
-            <input type="submit" value="Enviar" class="btn btn-primary">
+            <button type="submit" name="actualizar" class="btn btn-success mt-3">Actualizar</button>
+            
           </form>
-            <form action="actualizar.php" method="post">
-            <input type="submit" value="Enviar"  class="btn btn-primary">
-            </form>
+
         </div>
       </div>
     </div>
