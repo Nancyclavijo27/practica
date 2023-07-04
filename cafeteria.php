@@ -66,7 +66,7 @@ if($_POST){
     <div class="row">
       <div class="col-md-6">
         <div class="bg-dark text-white mt-5 p-2" id="contenido">
-          <h2>Lista de Productos</h2>
+          <h2>Lista de Productos<a class="btn btn-danger"  href="edicion.php">Edicion</a></h2> 
           <?php foreach($resultado as $producto ) {?>
       <ul id="ID">
         <li>Nombre de producto: <?php echo $producto['nombre']; ?></li>
@@ -115,9 +115,7 @@ if($_POST){
             </div>
             <input type="submit" value="Enviar" class="btn btn-primary">
           </form>
-            <form action="actualizar.php" method="post">
-            <input type="submit" value="Enviar"  class="btn btn-primary">
-            </form>
+            
         </div>
       </div>
     </div>
