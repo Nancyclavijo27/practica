@@ -42,7 +42,6 @@ if($_POST){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +60,6 @@ if($_POST){
      
 </head>
 <body>
-   
   <div class="container my-5">
     <div class="row">
       <div class="col-md-6">
@@ -120,7 +118,5 @@ if($_POST){
       </div>
     </div>
   </div>
-  
-  
 </body>
 </html>
