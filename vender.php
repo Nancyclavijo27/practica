@@ -1,8 +1,10 @@
 <?php 
 include_once "encabezado.php";
+include_once "dbproduc.php";
 session_start();
 if(!isset($_SESSION["carrito"])) $_SESSION["carrito"] = [];
 $granTotal = 0;
+//var_dump($_SESSION);
 ?>
 	<div class="col-xs-12">
 		<h1>Vender</h1>
@@ -48,19 +50,19 @@ $granTotal = 0;
 			}
 		?>
 		<br>
-		<form method="post" action="agregarAlCarrito.php">
-			<label for="codigo">Código de barras:</label>
-			<input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo" placeholder="Escribe el código">
+		<form method="post" action="agregar_carrito.php">
+			<label for="nombre">Nombre:</label>
+			<input autocomplete="off" autofocus class="form-control" name="nombre" required type="text" id="nombre" placeholder="Escribe el nombre">
 		</form>
 		<br><br>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Código</th>
-					<th>Descripción</th>
-					<th>Precio de venta</th>
-					<th>Cantidad</th>
+					<th>Referencia</th>
+					<th>Nombre</th>
+					<th>Precio</th>
+					<th>stock</th>
 					<th>Total</th>
 					<th>Quitar</th>
 				</tr>
@@ -70,11 +72,11 @@ $granTotal = 0;
 						$granTotal += $producto->total;
 					?>
 				<tr>
-					<td><?php echo $producto->id ?></td>
-					<td><?php echo $producto->codigo ?></td>
-					<td><?php echo $producto->descripcion ?></td>
-					<td><?php echo $producto->precioVenta ?></td>
-					<td><?php echo $producto->cantidad ?></td>
+					<td><?php echo $producto->ID ?></td>
+					<td><?php echo $producto->referencia ?></td>
+					<td><?php echo $producto->nombre ?></td>
+					<td><?php echo $producto->precio ?></td>
+					<td><?php echo $producto->stock ?></td>
 					<td><?php echo $producto->total ?></td>
 					<td><a class="btn btn-danger" href="<?php echo "quitarDelCarrito.php?indice=" . $indice?>"><i class="fa fa-trash"></i></a></td>
 				</tr>
