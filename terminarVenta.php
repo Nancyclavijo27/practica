@@ -6,7 +6,7 @@ session_start();
 
 
 $total = $_POST["total"];
-include_once "base_de_datos.php";
+include_once "dbproduc.php";
 
 
 $ahora = date("Y-m-d H:i:s");
@@ -23,11 +23,11 @@ $idVenta = $resultado === false ? 1 : $resultado->id;
 
 $base_de_datos->beginTransaction();
 $sentencia = $base_de_datos->prepare("INSERT INTO productos_vendidos(id_producto, id_venta, cantidad) VALUES (?, ?, ?);");
-$sentenciaExistencia = $base_de_datos->prepare("UPDATE productos SET existencia = existencia - ? WHERE id = ?;");
+$sentenciaExistencia = $base_de_datos->prepare("UPDATE productos SET stock = stock - ? WHERE ID = ?;");
 foreach ($_SESSION["carrito"] as $producto) {
 	$total += $producto->total;
-	$sentencia->execute([$producto->id, $idVenta, $producto->cantidad]);
-	$sentenciaExistencia->execute([$producto->cantidad, $producto->id]);
+	$sentencia->execute([$producto->ID, $idVenta, $producto->stock]);
+	$sentenciaExistencia->execute([$producto->stock, $producto->ID]);
 }
 $base_de_datos->commit();
 unset($_SESSION["carrito"]);
