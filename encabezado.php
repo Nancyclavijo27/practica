@@ -33,6 +33,9 @@
       <li class="nav-item">
         <a class="nav-link" href="./ventas.php">Ventas</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./listar.php">Admin</a>
+      </li>
       
     </ul>
   </div>
